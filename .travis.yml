@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t kinath/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t kinathru/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true kinath/react-test npm test
+  - docker run -e CI=true kinathru/react-test npm test
 
 after_success:
-  - docker build -t kinath/multi-client ./client
-  - docker build -t kinath/multi-nginx ./nginx
-  - docker build -t kinath/multi-server ./server
-  - docker build -t kinath/multi-worker ./worker
+  - docker build -t kinathru/multi-client ./client
+  - docker build -t kinathru/multi-nginx ./nginx
+  - docker build -t kinathru/multi-server ./server
+  - docker build -t kinathru/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push kinath/multi-client
-  - docker push kinath/multi-nginx
-  - docker push kinath/multi-server
-  - docker push kinath/multi-worker
+  - docker push kinathru/multi-client
+  - docker push kinathru/multi-nginx
+  - docker push kinathru/multi-server
+  - docker push kinathru/multi-worker
